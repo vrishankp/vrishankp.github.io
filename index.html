@@ -14,28 +14,7 @@
 	const startButton = document.querySelector("#example-start-button");
 	const stopButton = document.querySelector("#example-stop-button");
 	const switchCameraButton = document.querySelector("#example-switch-camera-button");
-	// arReady event triggered when ready
-        sceneEl.addEventListener("arReady", (event) => {
-	  console.log("ar ready");
-        });
-	// detect target found
-        sceneEl.addEventListener("targetFound", event => {
-          console.log("target found");
-        });
-	// detect target lost
-        sceneEl.addEventListener("targetLost", event => {
-          console.log("target lost");
-        });
-	// arError event triggered when something went wrong. Mostly browser compatbility issue
-        sceneEl.addEventListener("arError", (event) => {
-	  console.log("ar error");
-        });
-	startButton.addEventListener('click', () => {
-	  arSystem.start(); // start AR 
-        });
-	stopButton.addEventListener('click', () => {
-	  arSystem.stop(); // stop
-	});
+
 	switchCameraButton.addEventListener('click', () => {
 	  arSystem.switchCamera();
 	});
@@ -69,15 +48,17 @@
     <div class="example-container">
       <div id="example-control-overlay" class="overlay">
 	<div>
-	  <button id="example-start-button">Start</button>
-	  <button id="example-stop-button">Stop</button>
 	  <button id="example-switch-camera-button">Switch Camera</button>
 	</div>
       </div>
-      <a-scene mindar-face="autoStart: false" embedded color-space="sRGB" renderer="colorManagement: true, physicallyCorrectLights" vr-mode-ui="enabled: false" device-orientation-permission-ui="enabled: false">
-        <a-camera active="false" position="0 0 0" look-controls="false"></a-camera>
-        <a-entity mindar-face-target="anchorIndex: 1">
-	  <a-sphere color="green" radius="0.1"></a-sphere>
+      <a-scene mindar-face embedded color-space="sRGB" renderer="colorManagement: true, physicallyCorrectLights" vr-mode-ui="enabled: false" device-orientation-permission-ui="enabled: false">
+        <a-assets>
+    <a-asset-item id="glassesModel" src="https://cdn.jsdelivr.net/gh/hiukim/mind-ar-js@1.2.5/examples/face-tracking/assets/glasses/scene.gltf"></a-asset-item>
+        </a-assets>
+  
+        <a-camera active="false" position="0 0 0"></a-camera>
+        <a-entity mindar-face-target="anchorIndex: 168">
+    <a-gltf-model rotation="0 0 0" position="0 0 0" scale="0.01 0.01 0.01" src="#glassesModel"></a-gltf-model>
         </a-entity>
       </a-scene>
     </div>
