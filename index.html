@@ -7,19 +7,11 @@
     <script>
       document.addEventListener("DOMContentLoaded", function() {
 	const sceneEl = document.querySelector('a-scene');
-	const capyTarget = document.querySelector("#target2");
-	const capyVid = document.querySelector("#capy-mp4");
 	  let arSystem;
 	  sceneEl.addEventListener('loaded', function () {
 		  arSystem = sceneEl.systems["mindar-face-system"];
 		});
 
-	capyTarget.addEventListener("targetFound", () => {
-          capyVid.volume = globalVolume;
-          capyVid.play();
-        });
-
-	      capyTarget.addEventListener("targetLost", () => capyVid.pause());
 	      
 	const switchCameraButton = document.querySelector("#example-switch-camera-button");
 
@@ -61,8 +53,6 @@
       </div>
       <a-scene mindar-face embedded color-space="sRGB" renderer="colorManagement: true, physicallyCorrectLights" vr-mode-ui="enabled: false" device-orientation-permission-ui="enabled: false">
         <a-assets>
-        <video id="capy-mp4" src="capybara.mp4"></video>
-        <a-asset-item id="porscheModel" src="porsche.glb"></a-asset-item>
       </a-assets>
     <a-asset-item id="glassesModel" src="https://cdn.jsdelivr.net/gh/hiukim/mind-ar-js@1.2.5/examples/face-tracking/assets/glasses/scene.gltf"></a-asset-item>
         </a-assets>
@@ -73,9 +63,6 @@
         </a-entity>
       </a-scene>
 
-	<a-entity mindar-image-target="targetIndex: 2" id="target2">
-        <a-video id="capybara-vid-link" src="#capy-mp4" autoplay="false" rotation="0 0 0" width="1" height="0.5625" scale="2 2 2" position="0 0 0"></a-video>
-      </a-entity>
     </div>
   </body>
 </html>
